@@ -1,0 +1,56 @@
+body {
+    margin: 50px;
+    padding: 0;
+    background: linear-gradient(to left #a1a1a1, #535353)
+}
+.main_container {
+    display: flex;
+    flex-direction: column; /* Apila el título sobre la cuadrícula */
+    align-items: center; /* Centra horizontalmente */
+    gap: 40px; /* Espacio entre el título y la cuadrícula */
+}
+.container{
+    border: #773000 3px solid;
+    border-radius: 25px;
+    padding: 10px;
+    width: 550px;
+    height: 60px;
+    background: linear-gradient(to right , #f19d61, #ee6205); 
+    color: white;
+    font-size: 28px;
+    text-align: center;
+    line-height: 50px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+    }
+table {
+    border-collapse: collapse;
+    background-color: white; /* El color principal de la calavera es blanco */
+}
+td {
+    border: #919191 1px solid; /* Bordes para definir cada "pixel" */
+    width: 15px; /* Tamaño de cada "pixel" */
+    height: 15px;
+    padding: 0;
+    margin: 0;
+    line-height: 0;
+    font-size: 0; /* Asegurarse de que no haya espacio extra */
+}
+        
+.pixel_art_container {
+    display: grid;
+    /* Define 3 columnas de igual tamaño. Cambia el '3' si quieres más o menos columnas. */
+    grid-template-columns: repeat(3, auto); 
+    gap: 30px; /* Espacio entre cada elemento de la cuadrícula */
+    justify-items: center; /* Centra los elementos horizontalmente en su celda */
+    align-items: center; /* Centra los elementos verticalmente en su celda */
+    }
+/* Colores utilizados*/
+.black { background-color: #000000; }
+.white { background-color: #ffffff; }
+.red { background-color: #ff0000; }
+.yellow { background-color: #ffff00; }
+.green { background-color: #32df0f; }
+.purple { background-color: #751daf; }
+.blue { background-color: #1897ff; }
+.gray { background-color: rgb(207, 207, 207);}
+.orange { background-color: #ffa500; } /* Para el 8x5 */
