@@ -1,7 +1,11 @@
 body {
-    margin: 50px;
+    margin: 0;
     padding: 0;
-    background: linear-gradient(to left #a1a1a1, #535353)
+    background-image: url('sunset.gif');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 .main_container {
     display: flex;
@@ -11,23 +15,21 @@ body {
 }
 .container{
     border: #773000 3px solid;
-    border-radius: 25px;
-    padding: 10px;
-    width: 550px;
-    height: 60px;
-    background: linear-gradient(to right , #f19d61, #ee6205); 
+    padding: 10px 0px;
+    width: 100%;
+    height: auto;
+    background: linear-gradient(to right , #f19d61, #ca5100); 
     color: white;
-    font-size: 28px;
+    font-size: 40px;
     text-align: center;
     line-height: 50px;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
     }
 table {
     border-collapse: collapse;
-    background-color: white; /* El color principal de la calavera es blanco */
+    background-color: transparent; /* El color principal de la calavera es blanco */
 }
 td {
-    border: #919191 1px solid; /* Bordes para definir cada "pixel" */
     width: 15px; /* Tamaño de cada "pixel" */
     height: 15px;
     padding: 0;
@@ -54,3 +56,18 @@ td {
 .blue { background-color: #1897ff; }
 .gray { background-color: rgb(207, 207, 207);}
 .orange { background-color: #ffa500; } /* Para el 8x5 */
+
+/* --- ESTILOS PARA LA ANIMACIÓN DE ENTRADA --- */
+
+/* 1. Estado inicial de cada elemento (oculto y ligeramente desplazado) */
+.pixel_art_container > div {
+    opacity: 0; /* Totalmente transparente */
+    transform: translateY(30px); /* Desplazado 30px hacia abajo */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Define la suavidad de la animación */
+}
+
+/* 2. Estado final (visible) que se aplicará con JavaScript */
+.pixel_art_container > div.visible {
+    opacity: 1; /* Totalmente visible */
+    transform: translateY(0); /* Vuelve a su posición original */
+}
