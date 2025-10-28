@@ -28,6 +28,11 @@ body {
 table {
     border-collapse: collapse;
     background-color: transparent; /* El color principal de la calavera es blanco */
+    animation: mover 3s infinite alternate ease-in-out;
+}
+@keyframes mover {
+    0% { transform: translateX(25);}
+    100% { transform: translateX(100px);}
 }
 td {
     width: 15px; /* Tamaño de cada "pixel" */
