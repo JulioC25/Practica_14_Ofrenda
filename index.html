@@ -15,7 +15,7 @@
 </audio>
 
 <div id="control-audio" style="position: fixed; top: 150px; right: 20px; z-index: 1000; cursor: pointer; background-color: rgba(255, 255, 255, 0.8); padding: 10px; border-radius: 50%;">
-    <img id="icono-audio" src="https://img.icons8.com/ios-filled/50/000000/play-button-circled--v1.png" alt="Control de Audio" width="30" height="30">
+    <img id="icono-audio" src="play_button_circled.png" alt="Control de Audio" width="30" height="30">
 </div>
 
 <script>
@@ -66,10 +66,19 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 <!-- ========== FIN: AUDIO DE FONDO PARA LA OFRENDA ========== -->
+
+
+ <!-- ========== INICIO: BOTÓN DE CONTROL PARA AUDIO INTERACTIVO ========== -->
+<div id="control-interactivo" style="position: fixed; top: 220px; right: 20px; z-index: 1000; cursor: pointer; background-color: rgba(255, 165, 0, 0.8); padding: 10px; border-radius: 50%; display: none;">
+    <img id="icono-interactivo" src="pausa.png" alt="Control de Audio Interactivo" width="30" height="30">
+</div>
+<!-- ========== FIN: BOTÓN DE CONTROL PARA AUDIO INTERACTIVO ========== -->
+
     <div class="main_container">
         <div class="container">
             Ofrenda Digital del Día de Muertos
         </div>
+        <h1>Haz click y descubre un mundo de tradiciones</h1>
         <!--contenedor para los pixel art-->
         <div class="pixel_art_container">
             <div class="calaca_julio"> 
@@ -2811,6 +2820,81 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     </script>
     <!-- FIN DEL CÓDIGO DE ANIMACIÓN -->
+
+
+<!-- ========== INICIO: CÓDIGO MEJORADO PARA AUDIO INTERACTIVO CON BOTÓN DE PAUSA ========== -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // --- URLs para los iconos ---
+    const iconoPlay = "https://img.icons8.com/ios-filled/50/000000/play-button-circled--v1.png";
+    const iconoPausa = "pausa.png";
+    // --- Referencias a los elementos del DOM ---
+    const controlInteractivo = document.getElementById('control-interactivo');
+    const iconoInteractivo = document.getElementById('icono-interactivo');
+
+    // --- Mapeo de elementos a sus archivos de audio ---
+    const sonidosPorElemento = {
+        'calaca_julio': 'auds/Aca-Julio.mp3',
+        'calaca_carlos': 'auds/Primaveras-carlos.mp3',
+        'calaca_celina': 'auds/Llorona-celi.mp3',
+        'botellas_abi': 'auds/Si_puedes-Abi.mp3',
+        'Ofrenda': 'auds/No-Ofrenda.mp3',
+        'calaca_Vero': 'auds/Idiota-Vero.mp3'
+    };
+
+    let audioActual = null;
+
+    // --- Lógica para los elementos clickeables ---
+    for (const claseElemento in sonidosPorElemento) {
+        const elemento = document.querySelector('.' + claseElemento);
+        const rutaSonido = sonidosPorElemento[claseElemento];
+
+        if (elemento) {
+            elemento.style.cursor = 'pointer';
+
+            elemento.addEventListener('click', function() {
+                // Si se hace clic en un elemento nuevo, se detiene el audio anterior.
+                if (audioActual) {
+                    audioActual.pause();
+                    audioActual.currentTime = 0;
+                }
+
+                // Crear y reproducir el nuevo audio
+                const nuevoAudio = new Audio(rutaSonido);
+                nuevoAudio.play().catch(error => console.error("Error al reproducir:", error));
+                
+                // Guardar la referencia al audio actual
+                audioActual = nuevoAudio;
+
+                // Mostrar el botón de control y poner el ícono de pausa
+                controlInteractivo.style.display = 'block';
+                iconoInteractivo.src = iconoPausa;
+                
+                // Si la canción termina por sí sola, ocultar el botón.
+                audioActual.onended = function() {
+                    controlInteractivo.style.display = 'none';
+                };
+            });
+        }
+    }
+
+    // --- Lógica para el botón de control (Pausa/Play) ---
+    controlInteractivo.addEventListener('click', function() {
+        // Solo actuar si hay un audio cargado
+        if (audioActual) {
+            if (audioActual.paused) {
+                audioActual.play();
+                iconoInteractivo.src = iconoPausa;
+            } else {
+                audioActual.pause();
+                iconoInteractivo.src = iconoPlay;
+            }
+        }
+    });
+});
+</script>
+<!-- ========== FIN: CÓDIGO MEJORADO PARA AUDIO INTERACTIVO ========== -->
+
 
 </body>
 </html>
