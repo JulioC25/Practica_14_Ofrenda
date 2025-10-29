@@ -8,6 +8,64 @@
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
 </head>
 <body>
+    <!-- ========== INICIO: AUDIO DE FONDO PARA LA OFRENDA ========== -->
+<audio id="musicaDeFondo" loop>
+    <source src="México_en_la_piel.mp3" type="audio/mp3">
+    Tu navegador no soporta el elemento de audio.
+</audio>
+
+<div id="control-audio" style="position: fixed; top: 150px; right: 20px; z-index: 1000; cursor: pointer; background-color: rgba(255, 255, 255, 0.8); padding: 10px; border-radius: 50%;">
+    <img id="icono-audio" src="https://img.icons8.com/ios-filled/50/000000/play-button-circled--v1.png" alt="Control de Audio" width="30" height="30">
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const musica = document.getElementById('musicaDeFondo');
+    const controlAudio = document.getElementById('control-audio');
+    const iconoAudio = document.getElementById('icono-audio');
+    let haInteractuado = false;
+
+    // URLs para los iconos de play y pausa
+    const iconoPlay = "play.png";
+    const iconoPausa = "pause.png";
+
+    function iniciarAudio() {
+        if (!haInteractuado) {
+            haInteractuado = true;
+            musica.play().then(() => {
+                iconoAudio.src = iconoPausa;
+            }).catch(error => {
+                console.log("La reproducción automática fue bloqueada por el navegador.");
+            });
+        }
+    }
+
+    // El audio intenta iniciarse con la primera interacción del usuario en cualquier parte de la página.
+    document.body.addEventListener('click', iniciarAudio, { once: true });
+    document.body.addEventListener('scroll', iniciarAudio, { once: true });
+
+
+    controlAudio.addEventListener('click', function() {
+        if (musica.paused) {
+            musica.play();
+            iconoAudio.src = iconoPausa;
+        } else {
+            musica.pause();
+            iconoAudio.src = iconoPlay;
+        }
+    });
+
+    // Asegurarse de que el icono refleje el estado correcto si la música se detiene por otras razones
+    musica.onpause = function() {
+        iconoAudio.src = iconoPlay;
+    };
+
+    musica.onplay = function() {
+        iconoAudio.src = iconoPausa;
+    };
+});
+</script>
+<!-- ========== FIN: AUDIO DE FONDO PARA LA OFRENDA ========== -->
     <div class="main_container">
         <div class="container">
             Ofrenda Digital del Día de Muertos
